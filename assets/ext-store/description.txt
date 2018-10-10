@@ -26,6 +26,13 @@ Permissions requested:
 - Notifications (Show problems and extract notification)
 - Communicate with websites (Used for the live tutorials)
 
+★ Version 3.9.0
+- Configure a delay for each step of a workflow
+- Update jQuery to 3.3.1
+- Update chance.js to 1.0.16
+- Update math.js to 5.2.0
+- Update moment.js to 2.22.2
+
 ★ Version 3.8.3
 - Fixed `"url": "https://a.full.url"` not working as expected in rules
 - Fixed a bug where the extension lost it's settings when being unloading by chrome

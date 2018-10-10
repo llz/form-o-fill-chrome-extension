@@ -7,6 +7,27 @@ var plugins = require("gulp-load-plugins")();
 // this can be used to debug gulp runs:
 // .pipe(debug({verbose: true}))
 
+/* If the strip-debug step breaks check
+ * 1. No ES6 stuff used
+ * 2. No Multiline Logger statements
+ *
+ * use this in gulp-strip.debug/index.js:
+ *
+module.exports = function(src) {
+  // src
+  //   .split(/\r?\n/)
+  //   .slice(600)
+  //   .forEach(function(line, index) {
+  //     console.log("#" + (index + 1) + ": " + line);
+  //   });
+  return rocambole.moonwalk(src, function(node) {
+    stripDebugger(node);
+    stripConsole(node);
+    stripAlert(node);
+  });
+};
+ */
+
 // Load the manifest as JSON
 var manifest = require("./src/manifest");
 
@@ -133,8 +154,8 @@ gulp.task("globalJs", ["clean"], function() {
       "src/js/global/crypto.js",
     ])
     .pipe(plugins.replaceTask(replaceOpts))
-    .pipe(plugins.concat("global.js"))
     .pipe(plugins.stripDebug())
+    .pipe(plugins.concat("global.js"))
     .pipe(plugins.uglify())
     .pipe(gulp.dest("build/js/"));
 });
@@ -161,8 +182,8 @@ gulp.task("backgroundJs", ["clean"], function() {
       "src/js/background/hotkeys.js",
     ])
     .pipe(plugins.replaceTask(replaceOpts))
-    .pipe(plugins.concat("background.js"))
     .pipe(plugins.stripDebug())
+    .pipe(plugins.concat("background.js"))
     .pipe(plugins.uglify())
     .pipe(gulp.dest("build/js/"));
 });
@@ -174,8 +195,8 @@ gulp.task("contentJs", ["clean"], function() {
   return gulp
     .src(["src/vendor/optimal-select/optimal-select.js", "src/js/content/*.js"])
     .pipe(plugins.replaceTask(replaceOpts))
-    .pipe(plugins.concat("fof_content.js"))
     .pipe(plugins.stripDebug())
+    .pipe(plugins.concat("fof_content.js"))
     .pipe(plugins.uglify())
     .pipe(gulp.dest("build/js/"));
 });
@@ -199,8 +220,8 @@ gulp.task("optionsJs", ["clean"], function() {
       "src/js/options/rule_summary.js",
     ])
     .pipe(plugins.replaceTask(replaceOpts))
-    .pipe(plugins.concat("options.js"))
     .pipe(plugins.stripDebug())
+    .pipe(plugins.concat("options.js"))
     .pipe(plugins.uglify())
     .pipe(gulp.dest("build/js/"));
 });

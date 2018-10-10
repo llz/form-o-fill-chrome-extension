@@ -19,9 +19,15 @@
       2. Input field: <input value="Value from pageload" id="target2" /><br>
     </form>
     Rules Import: 
-    <textarea id="form-o-fill-testing-import">{
+    <textarea id="form-o-fill-testing-import">
+      {
   "workflows": [
     {
+      "delays": [
+        "2000",
+        "0"
+      ],
+      "flags": {},
       "id": 1,
       "name": "Form-O-Fill Workflow Test",
       "steps": [
@@ -39,10 +45,21 @@
     ],
     "rules": [
       {
-        "code": "var rules = [{\n  name: \"step 1 -> 2\",\n  url: /workflow-1/,\n  fields: [{\n    selector: \"#target1\",\n    value: \"Filled by step 1\"\n  }, {\n    selector: \"form\",\n    value: function($e) {\n      $e.trigger(\"submit\");\n    }\n  }]\n}, {\n  name: \"step 2 -> 3\",\n  url: /workflow-2/,\n  fields: [{\n    selector: \"#target1\",\n    value: \"Filled by step 2\"\n  }, {\n    selector: \"form\",\n    value: function($e) {\n      $e.trigger(\"submit\");\n    }\n  }]\n}\n];",
+        "code": "var rules = [{\n  name: \"step 1 -> 2\",\n  workflowStepDelay: 2000,\n  url: /workflow-1/,\n  fields: [{\n    selector: \"#target1\",\n    value: \"Filled by step 1\"\n  }, {\n    selector: \"form\",\n    value: function($e) {\n      $e.trigger(\"submit\");\n    }\n  }]\n}, {\n  name: \"step 2 -> 3\",\n  url: /workflow-2/,\n  fields: [{\n    selector: \"#target1\",\n    value: \"Filled by step 2\"\n  }, {\n    selector: \"form\",\n    value: function($e) {\n      $e.trigger(\"submit\");\n    }\n  }]\n}\n];",
         "tabId": 1
       }
     ]
+  },
+  "settings": {
+    "alwaysShowPopup": false,
+    "jpegQuality": 60,
+    "reevalRules": false,
+    "matchOnLoad": false,
+    "dontMatchOnTabSwitch": false,
+    "importActive": false,
+    "importUrl": "",
+    "dontFireEvents": false,
+    "decryptionPassword": "undefined"
   }
 }
     </textarea><button id="form-o-fill-testing-import-submit" value="import">Import</button>
